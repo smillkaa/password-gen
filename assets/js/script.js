@@ -6,7 +6,7 @@ function generatePassword(){
 
   // Prompts to select criteria
   var charLength = prompt("Choose the length of characters from 8 to 128")
-    // While loop for user to select correct length
+    // Keeps looping until user selects correct length
     while(charLength < 8 || charLength > 128 || charLength === "" || charLength === null){
     alert("You need to choose a number between 8 and 128")
     var charLength = prompt("Choose the length of characters from 8 to 128")
@@ -35,8 +35,25 @@ function generatePassword(){
 
     //   return symbols [Math.floor(Math.random() * symbols.length)]
     // }
- 
-    return (charLength + charLower + charUpper + charSymbol + charNum)
+
+    // Variable to determine how many types selected
+    var typesCount =  charLower + charUpper + charSymbol + charNum 
+
+    // Variable that's filtered out of not selected criteria
+    var typesArray = [{charLower}, {charUpper}, {charSymbol},  {charNum}].filter(item => Object.values(item)[0])
+
+    // If no criteria selected, displays message
+    if(typesCount === 0){
+      return 'You need to include at least one criteria. Try again.'
+    }
+
+    for(var i = 0; i < charLength; i += typesCount){
+      typesArray.forEach(type =>{
+        var funcName = Object.keys(type)[0]
+        
+      })
+
+    }
 
 }
 
@@ -54,6 +71,3 @@ function writePassword() {
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
-
-// figure out where to place later
-// var typesArray = [charSymbol, charLower, charUpper, charNum].filter
