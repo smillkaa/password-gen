@@ -5,14 +5,13 @@ var generateBtn = document.querySelector("#generate");
 function generatePassword(){
 
   // Prompts to select criteria
-  var charLength = function(){
-    var charLengthValue = prompt("Choose the length of characters from 8 to 128")
+  var charLength = prompt("Choose the length of characters from 8 to 128")
     // While loop for user to select correct length
-    while(charLengthValue < 8 || charLengthValue > 128 || charLengthValue === "" || charLengthValue === null){
+    while(charLength < 8 || charLength > 128 || charLength === "" || charLength === null){
     alert("You need to choose a number between 8 and 128")
-    var charLengthValue = prompt("Choose the length of characters from 8 to 128")
+    var charLength = prompt("Choose the length of characters from 8 to 128")
     }
-  }
+  
     // When selected correctly, other prompts
     var charSymbol = confirm("Include symbols?")
     var charLower = confirm("Include lowercase letters?")
@@ -20,22 +19,22 @@ function generatePassword(){
     var charNum = confirm("Include numbers?")
 
     // Functions to generate the password
-    function getRandomLower(){
-      return String.fromCharCode(Math.floor(Math.random() * 26) + 97)
-    }
+    // function getRandomLower(){
+    //   return String.fromCharCode(Math.floor(Math.random() * 26) + 97)
+    // }
 
-    function getRandomUpper(){
-      return String.fromCharCode(Math.floor(Math.random() * 26) + 65)
-    }
+    // function getRandomUpper(){
+    //   return String.fromCharCode(Math.floor(Math.random() * 26) + 65)
+    // }
 
-    function getRandomNumber(){
-      return String.fromCharCode(Math.floor(Math.random() * 10) + 48)
-    }
-    function getRandomSymbol(){
-      var symbols = '!@#$%^&*(){}[]=<>/,.'
+    // function getRandomNumber(){
+    //   return String.fromCharCode(Math.floor(Math.random() * 10) + 48)
+    // }
+    // function getRandomSymbol(){
+    //   var symbols = '!@#$%^&*(){}[]=<>/,.'
 
-      return symbols [Math.floor(Math.random() * symbols.length)]
-    }
+    //   return symbols [Math.floor(Math.random() * symbols.length)]
+    // }
  
     return (charLength + charLower + charUpper + charSymbol + charNum)
 
@@ -55,3 +54,6 @@ function writePassword() {
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
+
+// figure out where to place later
+// var typesArray = [charSymbol, charLower, charUpper, charNum].filter
