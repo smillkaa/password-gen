@@ -1,8 +1,15 @@
 // Targets the button
-var generateBtn = document.querySelector("#generate");
+var generateBtn = document.querySelector("#generate")
+
+var randomFunc = {
+	lower: getRandomLower,
+	upper: getRandomUpper,
+	number: getRandomNumber,
+	symbol: getRandomSymbol
+}
 
 // Main function to generate password
-function generatePassword(){
+function generatePassword(lower, upper, number, symbol, length) {
 
   // Prompts to select criteria
   var charLength = prompt("Choose the length of characters from 8 to 128")
@@ -17,52 +24,53 @@ function generatePassword(){
     var charLower = confirm("Include lowercase letters?")
     var charUpper = confirm("Include uppercase letters?")
     var charNum = confirm("Include numbers?")
+    var generatedPassword = ''
+   // Variable to determine how many types selected
+   var typesCount =  charLower + charUpper + charSymbol + charNum 
 
-    // Functions to generate the password
-    // function getRandomLower(){
-    //   return String.fromCharCode(Math.floor(Math.random() * 26) + 97)
-    // }
+   // Variable that's filtered out of not selected criteria
+   var typesArr = [{charLower}, {charUpper}, {charSymbol},  {charNum}].filter(item => Object.values(item)[0])
 
-    // function getRandomUpper(){
-    //   return String.fromCharCode(Math.floor(Math.random() * 26) + 65)
-    // }
+   // If no criteria selected, displays message
+   if(typesCount === 0){
+     return 'You need to include at least one criteria. Try again.'
+   }
 
-    // function getRandomNumber(){
-    //   return String.fromCharCode(Math.floor(Math.random() * 10) + 48)
-    // }
-    // function getRandomSymbol(){
-    //   var symbols = '!@#$%^&*(){}[]=<>/,.'
+   // Create a loop
+	for(let i=0; i<length; i+=typesCount) {
+		typesArr.forEach(type => {
+			const funcName = Object.keys(type)[0];
+			generatedPassword += randomFunc[funcName]();
+		});
+	}
+	
+	const finalPassword = generatedPassword.slice(0, length);
+	
+	return finalPassword;
 
-    //   return symbols [Math.floor(Math.random() * symbols.length)]
-    // }
-
-    // Variable to determine how many types selected
-    var typesCount =  charLower + charUpper + charSymbol + charNum 
-
-    // Variable that's filtered out of not selected criteria
-    var typesArray = [{charLower}, {charUpper}, {charSymbol},  {charNum}].filter(item => Object.values(item)[0])
-
-    // If no criteria selected, displays message
-    if(typesCount === 0){
-      return 'You need to include at least one criteria. Try again.'
+    
+  }
+  // Functions to generate the password
+    function getRandomLower(){
+      return String.fromCharCode(Math.floor(Math.random() * 26) + 97)
     }
 
-    for(var i = 0; i < charLength; i += typesCount){
-      typesArray.forEach(type =>{
-        var funcName = Object.keys(type)[0]
-        
-      })
-
+    function getRandomUpper(){
+      return String.fromCharCode(Math.floor(Math.random() * 26) + 65)
     }
 
-}
+    function getRandomNumber(){
+      return String.fromCharCode(Math.floor(Math.random() * 10) + 48)
+    }
+    function getRandomSymbol(){
+      var symbols = '!@#$%^&*(){}[]=<>/,.'
 
-    // 2. validate the input if at least one was selected
-    // 3. generate the password
+      return symbols [Math.floor(Math.random() * symbols.length)]
+    }
 
 // Write password to the #password input
 function writePassword() {
-  var password = generatePassword();
+  var password = generatePassword(); // this is the main funct, it brings everything i just wrote into the result
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
