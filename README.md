@@ -10,9 +10,10 @@ HTML, CSS, JavaScript
 
 ### Website URL
 
+https://smillkaa.github.io/password-gen/
 
 ---
 Screenshot of the homepage:
 
-![](assets%5Cimages%5Css.png)
+![](assets/images/ss.png)
 ---
