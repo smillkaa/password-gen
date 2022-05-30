@@ -1,18 +1,20 @@
 // Targets the button
 var generateBtn = document.querySelector("#generate")
 
+// Creates keys
 var randomFunc = {
-	lower: getRandomLower,
-	upper: getRandomUpper,
-	number: getRandomNumber,
-	symbol: getRandomSymbol
+	charLower: getRandomLower,
+	charUpper: getRandomUpper,
+	charNum: getRandomNumber,
+	charSymbol: getRandomSymbol
 }
 
 // Main function to generate password
-function generatePassword(lower, upper, number, symbol, length) {
+function generatePassword(charLower, charUpper, charNum, charSymbol, length) {
 
   // Prompts to select criteria
   var charLength = prompt("Choose the length of characters from 8 to 128")
+
     // Keeps looping until user selects correct length
     while(charLength < 8 || charLength > 128 || charLength === "" || charLength === null){
     alert("You need to choose a number between 8 and 128")
@@ -24,7 +26,8 @@ function generatePassword(lower, upper, number, symbol, length) {
     var charLower = confirm("Include lowercase letters?")
     var charUpper = confirm("Include uppercase letters?")
     var charNum = confirm("Include numbers?")
-    var generatedPassword = ''
+    
+
    // Variable to determine how many types selected
    var typesCount =  charLower + charUpper + charSymbol + charNum 
 
@@ -37,7 +40,8 @@ function generatePassword(lower, upper, number, symbol, length) {
    }
 
    // Create a loop
-	for(let i=0; i<length; i+=typesCount) {
+   var generatedPassword = ''
+   for(let i=0; i<length; i+=typesCount) {
 		typesArr.forEach(type => {
 			const funcName = Object.keys(type)[0];
 			generatedPassword += randomFunc[funcName]();
@@ -47,9 +51,9 @@ function generatePassword(lower, upper, number, symbol, length) {
 	const finalPassword = generatedPassword.slice(0, length);
 	
 	return finalPassword;
-
+}
     
-  }
+  
   // Functions to generate the password
     function getRandomLower(){
       return String.fromCharCode(Math.floor(Math.random() * 26) + 97)
@@ -74,7 +78,7 @@ function writePassword() {
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
-
+	
 }
 
 // Add event listener to generate button
