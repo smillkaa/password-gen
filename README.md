@@ -13,7 +13,7 @@ HTML, CSS, JavaScript
 https://smillkaa.github.io/password-gen/
 
 ---
-Screenshot of the homepage:
+Homepage Display:
 
 ![](assets/images/ss.png)
 ---
