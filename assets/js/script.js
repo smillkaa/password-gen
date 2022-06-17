@@ -34,9 +34,14 @@ function generatePassword(charLower, charUpper, charNum, charSymbol, length) {
   var charLength = prompt("Choose the length of characters from 8 to 128")
 
   // Keeps looping prompt until user selects correct length
-  while(charLength < 8 || charLength > 128 || charLength === ""){
+  while(charLength < 8 || charLength > 128 || charLength === "" || isNaN(charLength)){
     alert("You need to choose a number between 8 and 128")
-    var charLength = prompt("Choose the length of characters from 8 to 128")
+    if(!null) {
+      var charLength = prompt("Choose the length of characters from 8 to 128")
+    }
+    else {
+      console.log("cancelled")
+    }
   }
 
   // When selected correctly, other prompts
@@ -47,12 +52,10 @@ function generatePassword(charLower, charUpper, charNum, charSymbol, length) {
     
 
   // Variable to determine how many types selected
-  var typesCount =  charLower + charUpper + charSymbol + charNum 
-  console.log("typesCount:", typesCount)
+  var typesCount =  charLower + charUpper + charSymbol + charNum
 
   // Variable that's filtered out of not selected criteria
-  var typesArr = [{charLower}, {charUpper}, {charSymbol},  {charNum}].filter(item => Object.values(item)[0])
-  console.log("typesArr: ", typesArr)
+  var typesArr = [{charLower}, {charUpper}, {charSymbol}, {charNum}].filter(item => Object.values(item)[0])
 
   // If no criteria selected, displays message
   if(typesCount === 0){
@@ -63,7 +66,7 @@ function generatePassword(charLower, charUpper, charNum, charSymbol, length) {
   var generatedPassword = ''
   for(let i = 0; i < charLength; i+=typesCount) {
     typesArr.forEach(type => {
-      const finalPassword = generatedPassword.slice(0, length)
+      generatedPassword.slice(0, length)
       var funcName = Object.keys(type)[0];
       generatedPassword += randomCharacters[funcName]();
     });
